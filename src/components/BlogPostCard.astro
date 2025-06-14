@@ -1,0 +1,57 @@
+---
+import { calculateReadingTime } from '../utils/readingTime';
+
+export interface Props {
+  title: string;
+  slug: string;
+  date: string;
+  category: string;
+  excerpt?: string;
+  content?: string;
+}
+
+const { title, slug, date, category, excerpt, content = '' } = Astro.props;
+const readingTime = calculateReadingTime(content);
+---
+
+<article class="group mb-8">
+  <a 
+    href={`/blog/${slug}`} 
+    class="block transition-opacity hover:opacity-70"
+    transition:name={`post-${slug}`}
+  >
+    <div class="flex justify-between items-start">
+      <div class="flex-1 mr-8">
+        <h3 class="font-newsreader text-lg text-light-text dark:text-dark-text mb-2 leading-relaxed">
+          {title}
+        </h3>
+        {excerpt && (
+          <p class="text-light-text/60 dark:text-dark-text/60 text-sm leading-relaxed mb-2">
+            {excerpt}
+          </p>
+        )}
+        <div class="flex items-center gap-2 text-xs text-light-text/50 dark:text-dark-text/50">
+          <time datetime={date}>
+            {new Date(date).toLocaleDateString('en-US', { 
+              month: 'short', 
+              day: 'numeric',
+              year: 'numeric'
+            })}
+          </time>
+          {readingTime > 0 && (
+            <>
+              <span>•</span>
+              <span>{readingTime} min read</span>
+            </>
+          )}
+        </div>
+      </div>
+      
+      <div class="flex-shrink-0">
+        <span class="text-xs font-medium text-light-text/70 dark:text-dark-text/70 uppercase tracking-wider">
+          {category}
+        </span>
+      </div>
+    </div>
+  </a>
+</article>

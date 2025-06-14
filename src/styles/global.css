@@ -1,0 +1,57 @@
+@import '@fontsource/eb-garamond/400.css';
+@import '@fontsource/eb-garamond/700.css';
+@import '@fontsource/eb-garamond/400-italic.css';
+@import '@fontsource/eb-garamond/700-italic.css';
+@import '@fontsource/newsreader/400.css';
+@import '@fontsource/newsreader/500.css';
+@import '@fontsource/newsreader/600.css';
+@import '@fontsource/newsreader/700.css';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* KaTeX styles for LaTeX rendering */
+@import 'katex/dist/katex.min.css';
+
+html {
+  font-family: 'Newsreader', serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-light-bg text-light-text dark:bg-dark-bg dark:text-dark-text;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-light-bg dark:bg-dark-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-light-text/30 dark:bg-dark-text/30 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-light-text/50 dark:bg-dark-text/50;
+}
+
+/* Selection styles */
+::selection {
+  @apply bg-light-text/20 dark:bg-dark-text/20;
+}
+
+/* Focus styles */
+button:focus,
+a:focus {
+  @apply outline-none ring-2 ring-light-text/50 dark:ring-dark-text/50 ring-offset-2 ring-offset-light-bg dark:ring-offset-dark-bg;
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

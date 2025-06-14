@@ -1,0 +1,156 @@
+---
+import MainLayout from './MainLayout.astro';
+import Header from '../components/Header.astro';
+import BackButton from '../components/BackButton.astro';
+import { calculateReadingTime } from '../utils/readingTime';
+
+export interface Props {
+  title: string;
+  date: string;
+  description?: string;
+  image?: string;
+  content: string;
+  headings: Array<{ depth: number; slug: string; text: string }>;
+}
+
+const { title, date, description, image, content, headings } = Astro.props;
+const readingTime = calculateReadingTime(content);
+const formattedDate = new Date(date).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+// Filter headings to only include h2 and h3 for the table of contents
+const tocHeadings = headings.filter(heading => heading.depth <= 3);
+---
+
+<MainLayout title={title} description={description} image={image}>
+  <div class="min-h-screen">
+    <Header />
+    
+    <main class="max-w-6xl mx-auto px-6 py-12">
+      <div class="mb-8">
+        <BackButton />
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+        <!-- Main Content -->
+        <article class="lg:col-span-3">
+          <header class="mb-12">
+            <h1 class="font-eb-garamond font-bold italic text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 text-light-text dark:text-dark-text">
+              {title}
+            </h1>
+            <div class="flex items-center gap-4 text-light-text/70 dark:text-dark-text/70">
+              <time datetime={date}>{formattedDate}</time>
+              <span>•</span>
+              <span>{readingTime} min read</span>
+            </div>
+          </header>
+          
+          <div class="prose prose-lg prose-stone dark:prose-invert max-w-none font-newsreader">
+            <slot />
+          </div>
+        </article>
+        
+        <!-- Sidebar -->
+        <aside class="lg:col-span-1">
+          <div class="sticky top-24">
+            {tocHeadings.length > 0 && (
+              <div class="mb-8">
+                <h3 class="font-eb-garamond font-bold text-xl mb-4 text-light-text dark:text-dark-text">
+                  Contents
+                </h3>
+                <nav id="table-of-contents">
+                  <ul class="space-y-2 text-sm">
+                    {tocHeadings.map((heading) => (
+                      <li class={`${heading.depth === 3 ? 'ml-4' : ''}`}>
+                        <a 
+                          href={`#${heading.slug}`}
+                          class="toc-link block py-1 text-light-text/70 dark:text-dark-text/70 hover:text-light-text dark:hover:text-dark-text transition-colors"
+                          data-heading={heading.slug}
+                        >
+                          {heading.text}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+            )}
+          </div>
+        </aside>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function initTableOfContents() {
+      const tocLinks = document.querySelectorAll('.toc-link');
+      const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+      
+      if (tocLinks.length === 0 || headings.length === 0) return;
+
+      // Create intersection observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const id = entry.target.id;
+          const tocLink = document.querySelector(`[data-heading="${id}"]`);
+          
+          if (entry.isIntersecting) {
+            // Remove active class from all links
+            tocLinks.forEach(link => {
+              link.classList.remove('font-bold', 'text-light-text', 'dark:text-dark-text');
+              link.classList.add('text-light-text/70', 'dark:text-dark-text/70');
+            });
+            
+            // Add active class to current link and all previous ones
+            const currentIndex = Array.from(tocLinks).findIndex(link => 
+              link.getAttribute('data-heading') === id
+            );
+            
+            if (currentIndex !== -1) {
+              for (let i = 0; i <= currentIndex; i++) {
+                const link = tocLinks[i];
+                link.classList.add('font-bold', 'text-light-text', 'dark:text-dark-text');
+                link.classList.remove('text-light-text/70', 'dark:text-dark-text/70');
+              }
+            }
+          }
+        });
+      }, {
+        rootMargin: '-20% 0% -35% 0%',
+        threshold: 0
+      });
+
+      // Observe all headings
+      headings.forEach((heading) => {
+        if (heading.id) {
+          observer.observe(heading);
+        }
+      });
+
+      // Add smooth scrolling to TOC links
+      tocLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('data-heading');
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initTableOfContents);
+    
+    // Re-initialize after page transitions
+    document.addEventListener('astro:after-swap', initTableOfContents);
+  </script>
+</MainLayout>

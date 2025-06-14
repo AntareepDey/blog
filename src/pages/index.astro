@@ -1,0 +1,68 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '../components/Header.astro';
+import ProfileSection from '../components/ProfileSection.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import { getCollection } from 'astro:content';
+
+// Get all blog posts and sort by date
+const allPosts = await getCollection('blog', ({ data }) => {
+  return !data.draft;
+});
+
+const sortedPosts = allPosts.sort((a, b) => 
+  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Group posts by year
+const postsByYear = sortedPosts.reduce((acc, post) => {
+  const year = new Date(post.data.date).getFullYear();
+  if (!acc[year]) {
+    acc[year] = [];
+  }
+  acc[year].push(post);
+  return acc;
+}, {} as Record<number, typeof sortedPosts>);
+
+const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
+---
+
+<MainLayout title="Antareep's Blog">
+  <div class="min-h-screen">
+    <Header />
+    
+    <main class="max-w-6xl mx-auto px-6 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+        <!-- Profile Section -->
+        <aside class="lg:col-span-1">
+          <ProfileSection />
+        </aside>
+        
+        <!-- Blog Posts Section -->
+        <section class="lg:col-span-2">
+          <div class="space-y-12">
+            {years.map(year => (
+              <div>
+                <h2 class="font-eb-garamond font-bold text-2xl text-light-text dark:text-dark-text mb-8 sticky top-8 bg-light-bg/80 dark:bg-dark-bg/80 backdrop-blur-sm py-2">
+                  {year}
+                </h2>
+                <div class="space-y-6">
+                  {postsByYear[year].map((post) => (
+                    <BlogPostCard
+                      title={post.data.title}
+                      slug={post.slug}
+                      date={post.data.date}
+                      category={post.data.category}
+                      excerpt={post.data.excerpt}
+                      content={post.body}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</MainLayout>
