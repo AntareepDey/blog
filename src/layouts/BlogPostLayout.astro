@@ -159,50 +159,57 @@ const tocHeadings = headings.filter(heading => heading.depth <= 3);
         if (block.querySelector('.copy-button')) return;
         
         const button = document.createElement('button');
-        button.className = 'copy-button absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-light-text/10 dark:bg-dark-text/10 hover:bg-light-text/20 dark:hover:bg-dark-text/20 rounded px-2 py-1 text-xs font-medium text-light-text dark:text-dark-text border border-light-text/20 dark:border-dark-text/20';
-        button.innerHTML = `
-          <span class="flex items-center gap-1">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-            Copy
-          </span>
+        button.className = 'copy-button absolute top-2 right-2 z-20 bg-gray-700 hover:bg-gray-600 text-white rounded px-2 py-1 text-xs font-medium transition-all duration-200 opacity-80 hover:opacity-100 flex items-center gap-1';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
+        
+        const copyIcon = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
         `;
+        
+        const successIcon = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20,6 9,17 4,12"></polyline>
+          </svg>
+        `;
+        
+        button.innerHTML = `${copyIcon}`;
         
         button.addEventListener('click', async () => {
           const code = block.querySelector('code');
           if (code) {
             try {
-              await navigator.clipboard.writeText(code.textContent || '');
-              button.innerHTML = `
-                <span class="flex items-center gap-1">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="20,6 9,17 4,12"></polyline>
-                  </svg>
-                  Copied
-                </span>
-              `;
+              const textContent = code.textContent || code.innerText || '';
+              await navigator.clipboard.writeText(textContent);
+              
+              // Update button to show success
+              button.innerHTML = `${successIcon}`;
+              button.className = 'copy-button absolute top-2 right-2 z-20 bg-gray-600 hover:bg-gray-500 text-white rounded px-2 py-1 text-xs font-medium transition-all duration-200 opacity-100 flex items-center gap-1';
+              
+              // Reset after 2 seconds
               setTimeout(() => {
-                button.innerHTML = `
-                  <span class="flex items-center gap-1">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                    Copy
-                  </span>
-                `;
+                button.innerHTML = `${copyIcon}`;
+                button.className = 'copy-button absolute top-2 right-2 z-20 bg-gray-700 hover:bg-gray-600 text-white rounded px-2 py-1 text-xs font-medium transition-all duration-200 opacity-80 hover:opacity-100 flex items-center gap-1';
               }, 2000);
             } catch (err) {
               console.error('Failed to copy code:', err);
+              // Show error state
+              button.innerHTML = `<span>Failed</span>`;
+              button.className = 'copy-button absolute top-2 right-2 z-20 bg-red-600 text-white rounded px-2 py-1 text-xs font-medium transition-all duration-200 opacity-100 flex items-center gap-1';
+              
+              setTimeout(() => {
+                button.innerHTML = `${copyIcon}<span>Copy</span>`;
+                button.className = 'copy-button absolute top-2 right-2 z-20 bg-gray-700 hover:bg-gray-600 text-white rounded px-2 py-1 text-xs font-medium transition-all duration-200 opacity-80 hover:opacity-100 flex items-center gap-1';
+              }, 2000);
             }
           }
         });
-        
+
         // Make the pre element relative and add group class
         block.style.position = 'relative';
-        block.classList.add('group');
+        block.style.overflow = 'visible';
         block.appendChild(button);
       });
     }
@@ -233,7 +240,7 @@ const tocHeadings = headings.filter(heading => heading.depth <= 3);
     }
 
     // Initialize on page load
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('astro:page-load', () => {
       initTableOfContents();
       initCodeBlocks();
       initImageCaptions();

@@ -189,3 +189,34 @@ a:focus {
   color: #f0eee6 !important;
   opacity: 0.8;
 }
+
+
+.prose pre {
+  @apply bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-x-auto;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  position: relative; /* Ensure relative positioning for button */
+}
+
+/* Copy button specific styles */
+.copy-button {
+  font-family: system-ui, -apple-system, sans-serif;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.copy-button:active {
+  transform: scale(0.95);
+}
+
+/* Ensure code blocks don't hide the button */
+.prose pre {
+  overflow: visible;
+}
+
+.prose pre code {
+  overflow-x: auto;
+  display: block;
+}
