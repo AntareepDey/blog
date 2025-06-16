@@ -55,3 +55,137 @@ a:focus {
 * {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
+
+/* Enhanced code block styles */
+.prose pre {
+  @apply bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg overflow-x-auto;
+  padding: 1rem;
+  margin: 1.5rem 0;
+}
+
+.prose code {
+  @apply text-sm font-mono;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 text-gray-800 dark:text-gray-200;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.prose :not(pre) > code {
+  @apply bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-1.5 py-0.5 rounded text-sm;
+}
+
+/* Enhanced image styles */
+.prose img {
+  @apply rounded-lg shadow-sm;
+  margin: 2rem auto;
+}
+
+.prose figure {
+  @apply my-8;
+}
+
+.prose figcaption {
+  @apply text-center mt-3 text-sm text-light-text/70 dark:text-dark-text/70 font-newsreader italic;
+}
+
+/* Override Tailwind Typography colors to match exact theme colors */
+.prose {
+  color: #97938c !important;
+  max-width: none;
+  line-height: 1.75;
+  font-size: 1.125rem;
+}
+
+.prose p {
+  color: #97938c !important;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: #97938c !important;
+  font-family: "EB Garamond", serif;
+  font-weight: 700;
+}
+
+.prose strong {
+  color: #97938c !important;
+  font-weight: 600;
+}
+
+.prose em {
+  color: #97938c !important;
+}
+
+.prose blockquote {
+  color: #97938c !important;
+  border-left-color: #97938c !important;
+}
+
+.prose ul li,
+.prose ol li {
+  color: #97938c !important;
+}
+
+.prose a {
+  color: #97938c !important;
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: #97938c !important;
+  opacity: 0.8;
+}
+
+/* Dark mode overrides */
+.dark .prose {
+  color: #f0eee6 !important;
+}
+
+.dark .prose p {
+  color: #f0eee6 !important;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #f0eee6 !important;
+}
+
+.dark .prose strong {
+  color: #f0eee6 !important;
+}
+
+.dark .prose em {
+  color: #f0eee6 !important;
+}
+
+.dark .prose blockquote {
+  color: #f0eee6 !important;
+  border-left-color: #f0eee6 !important;
+}
+
+.dark .prose ul li,
+.dark .prose ol li {
+  color: #f0eee6 !important;
+}
+
+.dark .prose a {
+  color: #f0eee6 !important;
+}
+
+.dark .prose a:hover {
+  color: #f0eee6 !important;
+  opacity: 0.8;
+}

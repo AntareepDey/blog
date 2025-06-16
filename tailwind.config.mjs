@@ -22,7 +22,7 @@ export default {
         DEFAULT: {
           css: {
             maxWidth: 'none',
-            color: '#97938c',
+            // color: '#97938c',
             lineHeight: '1.75',
             fontSize: '1.125rem',
             'h1, h2, h3, h4, h5, h6': {
@@ -30,6 +30,7 @@ export default {
               fontWeight: '700',
             },
             'p': {
+               color: '#97938c !important', // Ensure paragraph text color matches the light mode text color
               marginTop: '1.5rem',
               marginBottom: '1.5rem',
             },
@@ -40,6 +41,9 @@ export default {
             color: '#f0eee6',
             'h1, h2, h3, h4, h5, h6': {
               color: '#f0eee6',
+            },
+            'p': {
+              color: '#f0eee6 !important', // Add this line to match heading color in dark mode
             },
             'strong': {
               color: '#f0eee6',

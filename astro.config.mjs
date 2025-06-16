@@ -18,8 +18,12 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
     shikiConfig: {
-      theme: 'github-light-default',
-      wrap: true
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark'
+      },
+      wrap: true,
+      transformers: []
     }
   }
 });

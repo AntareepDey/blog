@@ -2,6 +2,7 @@
 import MainLayout from './MainLayout.astro';
 import Header from '../components/Header.astro';
 import BackButton from '../components/BackButton.astro';
+import Footer from '../components/Footer.astro';
 import { calculateReadingTime } from '../utils/readingTime';
 
 export interface Props {
@@ -48,13 +49,13 @@ const tocHeadings = headings.filter(heading => heading.depth <= 3);
             </div>
           </header>
           
-          <div class="prose prose-lg prose-stone dark:prose-invert max-w-none font-newsreader">
+          <div class="prose prose-lg prose-stone dark:prose-invert max-w-none font-newsreader markdown-content">
             <slot />
           </div>
         </article>
         
-        <!-- Sidebar -->
-        <aside class="lg:col-span-1">
+        <!-- Sidebar - Hidden on mobile/tablet, visible on desktop -->
+        <aside class="hidden lg:block lg:col-span-1">
           <div class="sticky top-24">
             {tocHeadings.length > 0 && (
               <div class="mb-8">
@@ -82,6 +83,8 @@ const tocHeadings = headings.filter(heading => heading.depth <= 3);
         </aside>
       </div>
     </main>
+    
+    <Footer />
   </div>
 
   <script>
@@ -147,10 +150,100 @@ const tocHeadings = headings.filter(heading => heading.depth <= 3);
       });
     }
 
+    function initCodeBlocks() {
+      // Add copy functionality to code blocks
+      const codeBlocks = document.querySelectorAll('pre');
+      
+      codeBlocks.forEach((block, index) => {
+        // Skip if already processed
+        if (block.querySelector('.copy-button')) return;
+        
+        const button = document.createElement('button');
+        button.className = 'copy-button absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-light-text/10 dark:bg-dark-text/10 hover:bg-light-text/20 dark:hover:bg-dark-text/20 rounded px-2 py-1 text-xs font-medium text-light-text dark:text-dark-text border border-light-text/20 dark:border-dark-text/20';
+        button.innerHTML = `
+          <span class="flex items-center gap-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            Copy
+          </span>
+        `;
+        
+        button.addEventListener('click', async () => {
+          const code = block.querySelector('code');
+          if (code) {
+            try {
+              await navigator.clipboard.writeText(code.textContent || '');
+              button.innerHTML = `
+                <span class="flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20,6 9,17 4,12"></polyline>
+                  </svg>
+                  Copied
+                </span>
+              `;
+              setTimeout(() => {
+                button.innerHTML = `
+                  <span class="flex items-center gap-1">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    Copy
+                  </span>
+                `;
+              }, 2000);
+            } catch (err) {
+              console.error('Failed to copy code:', err);
+            }
+          }
+        });
+        
+        // Make the pre element relative and add group class
+        block.style.position = 'relative';
+        block.classList.add('group');
+        block.appendChild(button);
+      });
+    }
+
+    function initImageCaptions() {
+      // Convert images with alt text to figures with captions
+      const images = document.querySelectorAll('.markdown-content img');
+      
+      images.forEach(img => {
+        const alt = img.getAttribute('alt');
+        if (alt && alt.trim() && !img.closest('figure')) {
+          const figure = document.createElement('figure');
+          figure.className = 'my-8';
+          
+          const caption = document.createElement('figcaption');
+          caption.className = 'text-center mt-3 text-sm text-light-text/70 dark:text-dark-text/70 font-newsreader italic';
+          caption.textContent = alt;
+          
+          img.parentNode?.insertBefore(figure, img);
+          figure.appendChild(img);
+          figure.appendChild(caption);
+          
+          // Remove alt attribute since it's now in the caption
+          img.removeAttribute('alt');
+          img.setAttribute('alt', ''); // Keep empty alt for accessibility
+        }
+      });
+    }
+
     // Initialize on page load
-    document.addEventListener('DOMContentLoaded', initTableOfContents);
+    document.addEventListener('DOMContentLoaded', () => {
+      initTableOfContents();
+      initCodeBlocks();
+      initImageCaptions();
+    });
     
     // Re-initialize after page transitions
-    document.addEventListener('astro:after-swap', initTableOfContents);
+    document.addEventListener('astro:after-swap', () => {
+      initTableOfContents();
+      initCodeBlocks();
+      initImageCaptions();
+    });
   </script>
 </MainLayout>

@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter} from 'astro:transitions';
 import '../styles/global.css';
 
 export interface Props {
@@ -39,7 +39,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:description" content={description} />
     {image && <meta name="twitter:image" content={image} />}
     
-    <ViewTransitions />
+    <ClientRouter />
     
     <script is:inline>
       // Prevent flash of unstyled content
