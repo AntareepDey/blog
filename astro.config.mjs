@@ -22,7 +22,7 @@ export default defineConfig({
         light: 'material-theme-lighter',
         dark: 'github-dark-dimmed',
       },
-      defaultColor: false,
+      defaultColor: "light",
       wrap: true
     }
   }

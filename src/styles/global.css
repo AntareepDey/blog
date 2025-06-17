@@ -1,3 +1,4 @@
+/* Font imports */
 @import '@fontsource/eb-garamond/400.css';
 @import '@fontsource/eb-garamond/700.css';
 @import '@fontsource/eb-garamond/400-italic.css';
@@ -6,13 +7,16 @@
 @import '@fontsource/newsreader/500.css';
 @import '@fontsource/newsreader/600.css';
 @import '@fontsource/newsreader/700.css';
+
+/* Tailwind layers */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* KaTeX styles for LaTeX rendering */
+/* KaTeX for LaTeX rendering */
 @import 'katex/dist/katex.min.css';
 
+/* Base styles */
 html {
   font-family: 'Newsreader', serif;
   scroll-behavior: smooth;
@@ -23,7 +27,12 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Custom scrollbar */
+/* Global transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -40,46 +49,128 @@ body {
   @apply bg-light-text/50 dark:bg-dark-text/50;
 }
 
-/* Selection styles */
+/* Text selection */
 ::selection {
   @apply bg-light-text/20 dark:bg-dark-text/20;
 }
 
-/* Focus styles */
+/* Focus ring styles */
 button:focus,
 a:focus {
   @apply outline-none ring-2 ring-light-text/50 dark:ring-dark-text/50 ring-offset-2 ring-offset-light-bg dark:ring-offset-dark-bg;
 }
 
-/* Smooth transitions for theme switching */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+/* Typography (prose) */
+.prose {
+  max-width: none;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: #97938c !important;
 }
 
-/* Enhanced code block styles */
-.prose pre {
-  @apply  border-gray-200 dark:border-gray-700 rounded-lg overflow-x-auto;
-  margin:  0;
-  position: relative;
-  overflow: visible;
-  background-color: var(--shiki-light-bg, #f6f8fa);
-}
-.prose code {
-  @apply text-sm font-mono;
+.prose p,
+.prose strong,
+.prose em,
+.prose blockquote,
+.prose ul li,
+.prose ol li,
+.prose a {
+  color: #97938c !important;
 }
 
-.prose pre code {
-  @apply bg-transparent p-0;
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: var(--shiki-light) !important;
+.prose a {
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  opacity: 0.8;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply font-eb-garamond;
+  font-weight: 700;
+  color: #97938c !important;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose blockquote {
+  border-left-color: #97938c !important;
 }
 
 .prose :not(pre) > code {
   @apply bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-1.5 py-0.5 rounded text-sm;
 }
 
-/* Enhanced image styles */
+/* Code block styling */
+.prose pre {
+  @apply border-gray-200 dark:border-gray-700 rounded-lg overflow-visible;
+  position: relative;
+  margin: 0;
+  background-color: var(--shiki-light-bg);
+}
+
+.prose pre code {
+  @apply text-sm font-mono bg-transparent p-0 block overflow-x-auto;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--shiki-light) !important;
+}
+
+/* KaTeX fix */
+.shiki {
+  background-color: transparent !important;
+}
+
+/* Dark mode overrides */
+.dark .prose {
+  color: #f0eee6 !important;
+}
+
+.dark .prose p,
+.dark .prose strong,
+.dark .prose em,
+.dark .prose blockquote,
+.dark .prose ul li,
+.dark .prose ol li,
+.dark .prose a {
+  color: #f0eee6 !important;
+}
+
+.dark .prose a:hover {
+  opacity: 0.8;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #f0eee6 !important;
+}
+
+.dark .prose blockquote {
+  border-left-color: #f0eee6 !important;
+}
+
+.dark .prose pre {
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+.dark .prose pre code {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
+/* Images and figures */
 .prose img {
   @apply rounded-lg shadow-sm;
   margin: 2rem auto;
@@ -93,109 +184,7 @@ a:focus {
   @apply text-center mt-3 text-sm text-light-text/70 dark:text-dark-text/70 font-newsreader italic;
 }
 
-/* Override Tailwind Typography colors to match exact theme colors */
-.prose {
-  color: #97938c !important;
-  max-width: none;
-  line-height: 1.75;
-  font-size: 1.125rem;
-}
-
-.prose p {
-  color: #97938c !important;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  color: #97938c !important;
-  font-family: "EB Garamond", serif;
-  font-weight: 700;
-}
-
-.prose strong {
-  color: #97938c !important;
-  font-weight: 600;
-}
-
-.prose em {
-  color: #97938c !important;
-}
-
-.prose blockquote {
-  color: #97938c !important;
-  border-left-color: #97938c !important;
-}
-
-.prose ul li,
-.prose ol li {
-  color: #97938c !important;
-}
-
-.prose a {
-  color: #97938c !important;
-  text-decoration: underline;
-}
-
-.prose a:hover {
-  color: #97938c !important;
-  opacity: 0.8;
-}
-
-/* Dark mode overrides */
-.dark .prose {
-  color: #f0eee6 !important;
-}
-
-.dark .prose p {
-  color: #f0eee6 !important;
-}
-
-.dark .prose h1,
-.dark .prose h2,
-.dark .prose h3,
-.dark .prose h4,
-.dark .prose h5,
-.dark .prose h6 {
-  color: #f0eee6 !important;
-}
-
-.dark .prose strong {
-  color: #f0eee6 !important;
-}
-
-.dark .prose em {
-  color: #f0eee6 !important;
-}
-
-.dark .prose blockquote {
-  color: #f0eee6 !important;
-  border-left-color: #f0eee6 !important;
-}
-
-.dark .prose ul li,
-.dark .prose ol li {
-  color: #f0eee6 !important;
-}
-
-.dark .prose a {
-  color: #f0eee6 !important;
-}
-
-.dark .prose a:hover {
-  color: #f0eee6 !important;
-  opacity: 0.8;
-}
-
-
-
-
-/* Copy button specific styles */
+/* Copy button styles */
 .copy-button {
   font-family: system-ui, -apple-system, sans-serif;
   cursor: pointer;
@@ -206,27 +195,4 @@ a:focus {
 
 .copy-button:active {
   transform: scale(0.95);
-}
-
-/* Ensure code blocks don't hide the button */
-.prose pre {
-  overflow: visible;
-}
-
-.prose pre code {
-  overflow-x: auto;
-  display: block;
-}
-
-.dark .prose pre {
-  /* Custom dark background - change this color to whatever you want */
-  background-color: var(--shiki-dark-bg); /* Or #0d1117, #161b22, etc. */
-}
-
-.dark .prose pre code {
-  color: var(--shiki-dark) !important;
-  background-color: var(--shiki-dark-bg) !important;
-}
-.shiki {
-  background-color: transparent !important;
 }
