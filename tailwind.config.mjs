@@ -6,7 +6,7 @@ export default {
     extend: {
       colors: {
         light: {
-          text: '#97938c',
+          text: '#7e7b74',
           bg: '#f0eee6',
         },
         dark: {
@@ -23,7 +23,7 @@ export default {
           css: {
             maxWidth: 'none',
             // color: '#97938c',
-            lineHeight: '1.75',
+            lineHeight: '1.5',
             fontSize: '1.125rem',
             'h1, h2, h3, h4, h5, h6': {
               fontFamily: '"EB Garamond", serif',
@@ -31,8 +31,8 @@ export default {
             },
             'p': {
                color: '#97938c !important', // Ensure paragraph text color matches the light mode text color
-              marginTop: '1.5rem',
-              marginBottom: '1.5rem',
+              marginTop: '1.0rem',
+              marginBottom: '1.0rem',
             },
           }
         },

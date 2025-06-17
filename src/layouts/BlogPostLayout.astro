@@ -225,7 +225,7 @@ const tocHeadings = headings.filter(heading => heading.depth <= 3);
           figure.className = 'my-8';
           
           const caption = document.createElement('figcaption');
-          caption.className = 'text-center mt-3 text-sm text-light-text/70 dark:text-dark-text/70 font-newsreader italic';
+          caption.className = 'text-center mt-0 text-sm text-light-text/80 dark:text-dark-text/80 font-newsreader italic';
           caption.textContent = alt;
           
           img.parentNode?.insertBefore(figure, img);

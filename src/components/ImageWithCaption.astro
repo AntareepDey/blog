@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 export interface Props {
   src: string;
   alt: string;
@@ -10,7 +11,7 @@ export interface Props {
 const { src, alt, caption, width, height } = Astro.props;
 ---
 
-<figure class="my-8">
+<figure class="my-4">
   <img 
     src={src} 
     alt={alt} 
@@ -18,9 +19,10 @@ const { src, alt, caption, width, height } = Astro.props;
     {width}
     {height}
     loading="lazy"
+    decoding="async"
   />
   {caption && (
-    <figcaption class="text-center mt-3 text-sm text-light-text/70 dark:text-dark-text/70 font-newsreader italic">
+    <figcaption class="text-center mt-0 text-sm text-light-text/80 dark:text-dark-text/80 font-newsreader italic">
       {caption}
     </figcaption>
   )}

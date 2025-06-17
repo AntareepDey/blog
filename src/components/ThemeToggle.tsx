@@ -6,8 +6,21 @@ export default function ThemeToggle() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light';
+    const defaultTheme = savedTheme || 'light';
+    
+    // If no theme was saved, save 'light' as default
+    if (!savedTheme) {
+      localStorage.setItem('theme', 'light');
+    }
     setTheme(savedTheme);
     setMounted(true);
+
+    // Apply the theme to the document
+    if (defaultTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, []);
 
   const toggleTheme = () => {

@@ -7,6 +7,9 @@ import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
   site: 'https://example.com',
+  devToolbar: {
+    enabled: false
+  },
   integrations: [
     react(),
     tailwind({

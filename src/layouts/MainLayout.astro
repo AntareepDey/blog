@@ -49,6 +49,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
         }
       }
       setTheme();
