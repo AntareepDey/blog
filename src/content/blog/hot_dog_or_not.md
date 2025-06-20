@@ -70,7 +70,7 @@ plt.show()
 
 Running the above code returns a result like this:
 
-![Sample of labelled images from the dataset.](/hotdogs_1.webp)
+![Sample of labelled images from the dataset.](/blog/hotdogs_1.webp)
 
 Those look delicious! The next step is to do some data pre-processing to feed these images to our neural network.
 
@@ -129,7 +129,7 @@ At the heart of this project lies the magic of transfer learning. For those unfa
 
 In my case, I chose the ResNet18 model as the foundation and modified the final layer for binary classification. ResNet18 is a convolutional neural network pre-trained on ImageNet, a dataset of over a million images across 1000 categories. The beauty of transfer learning is that we don't have to start from scratch. Instead, we fine-tune the existing model by adjusting its weights to fit our specific problem.
 
-![Transfer Learning](/hotdogs_2.webp)
+![Transfer Learning](/blog/hotdogs_2.webp)
 
 We can implement this concept in PyTorch as follows:
 
@@ -311,6 +311,6 @@ else:
         st.sidebar.error("It is not a hotdog")
 ```
 
-![Web app using Steamlit](/hotdog_3.webp)
+![Web app using Steamlit](/blog/hotdog_3.webp)
 
 While our app might seem like a silly project (and let's be honest, it kind of is), it demonstrates some powerful concepts in machine learning and computer vision. Transfer learning, custom dataset creation, and deploying models as web applications are all valuable skills in AI development.
