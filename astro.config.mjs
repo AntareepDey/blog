@@ -7,7 +7,7 @@ import rehypeKatex from 'rehype-katex';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://antareepdey.github.io/blog',
+  site: 'https://antareepdey.github.io',
   base: '/blog',
   format: 'file',
   output: 'static',
