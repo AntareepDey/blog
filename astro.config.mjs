@@ -8,6 +8,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://antareepdey.github.io/blog',
+  format: 'file',
   output: 'static',
   devToolbar: {
     enabled: false
