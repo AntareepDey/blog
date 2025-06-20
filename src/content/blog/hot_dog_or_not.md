@@ -3,6 +3,7 @@ title: "Hot Dog ? or Not a Hot Dog ?"
 date: "2023-09-10"
 category: "GUIDE"
 excerpt: "Remember that hilarious scene from *Silicon Valley* where Jian-Yang tried to pitch a Shazam for food app that could only identify hotdogs?"
+draft: false
 ---
 
 Remember that hilarious scene from *Silicon Valley* where Jian-Yang tried to pitch a "Shazam for food" app that could only identify hotdogs? Well, I took that ridiculous idea and made it a reality! Here's how I created a working app using a simple neural network trained on a custom-made dataset, and why it's more than just a joke.
