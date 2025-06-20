@@ -17,7 +17,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     
     <!-- SEO Meta Tags -->
@@ -42,7 +42,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <ClientRouter />
     
     <script is:inline>
-      // Prevent flash of unstyled content
       function setTheme() {
         const theme = localStorage.getItem('theme') || 'light';
         if (theme === 'dark') {

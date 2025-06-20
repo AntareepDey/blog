@@ -25,4 +25,4 @@ pnpm-debug.log*
 
 *.md
 bun.lock
-*.jpg
+*.webp
