@@ -24,22 +24,23 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 
 // Filter headings to only include h2 and h3 for the table of contents
 const tocHeadings = headings.filter(heading => heading.depth <= 3);
+const hasTableOfContents = tocHeadings.length > 0;
 ---
 
 <MainLayout title={title} description={description} image={image}>
   <div class="min-h-screen">
     <Header />
     
-    <main class="max-w-6xl mx-auto px-6 py-12">
-      <div class="mb-8">
-        <BackButton />
-      </div>
-      
-      <div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
-        <!-- Main Content -->
-        <article class="lg:col-span-3">
+    <div class="relative py-12">
+      <!-- Main Content - Centered with max-w-4xl -->
+      <main class="max-w-4xl mx-auto px-6">
+        <div class="mb-8">
+          <BackButton />
+        </div>
+        
+        <article>
           <header class="mb-12">
-            <h1 class="font-eb-garamond font-bold italic text-4xl md:text-5xl lg:text-6xl leading-tight mb-6 text-light-text dark:text-dark-text">
+            <h1 class="font-eb-garamond font-bold italic text-3xl md:text-4xl lg:text-5xl leading-tight mb-6 text-light-text dark:text-dark-text">
               {title}
             </h1>
             <div class="flex items-center gap-4 text-light-text/70 dark:text-dark-text/70">
@@ -53,36 +54,36 @@ const tocHeadings = headings.filter(heading => heading.depth <= 3);
             <slot />
           </div>
         </article>
-        
-        <!-- Sidebar - Hidden on mobile/tablet, visible on desktop -->
-        <aside class="hidden lg:block lg:col-span-1">
+      </main>
+      
+      <!-- Table of Contents - Positioned outside main container -->
+      {hasTableOfContents && (
+        <aside class="hidden xl:block fixed right-20 top-64 w-40">
           <div class="sticky top-24">
-            {tocHeadings.length > 0 && (
-              <div class="mb-8">
-                <h3 class="font-eb-garamond font-bold text-xl mb-4 text-light-text dark:text-dark-text">
-                  Contents
-                </h3>
-                <nav id="table-of-contents">
-                  <ul class="space-y-2 text-sm">
-                    {tocHeadings.map((heading) => (
-                      <li class={`${heading.depth === 3 ? 'ml-4' : ''}`}>
-                        <a 
-                          href={`#${heading.slug}`}
-                          class="toc-link block py-1 text-light-text/70 dark:text-dark-text/70 hover:text-light-text dark:hover:text-dark-text transition-colors"
-                          data-heading={heading.slug}
-                        >
-                          {heading.text}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </div>
-            )}
+            <div class="mb-8">
+              <h3 class="font-eb-garamond font-bold text-xl mb-4 text-light-text dark:text-dark-text">
+                Contents
+              </h3>
+              <nav id="table-of-contents">
+                <ul class="space-y-2 text-xs">
+                  {tocHeadings.map((heading) => (
+                    <li class={`${heading.depth === 3 ? 'ml-4' : ''}`}>
+                      <a 
+                        href={`#${heading.slug}`}
+                        class="toc-link block py-1 text-light-text/70 dark:text-dark-text/70 hover:text-light-text dark:hover:text-dark-text transition-colors"
+                        data-heading={heading.slug}
+                      >
+                        {heading.text}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
           </div>
         </aside>
-      </div>
-    </main>
+      )}
+    </div>
     
     <Footer />
   </div>

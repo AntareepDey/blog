@@ -8,8 +8,10 @@ export interface Props {
   image?: string;
 }
 
-const { title, description = "Personal blog by Antareep", image } = Astro.props;
+const { title, description = "Antareep's Blog", image } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const defaultImage = new URL('/blog/linkimg.webp', Astro.site || Astro.url.origin).href;
+const finalImage = image ? new URL(image, Astro.site || Astro.url.origin).href : defaultImage;
 ---
 
 <!doctype html>
@@ -22,22 +24,22 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     
     <!-- SEO Meta Tags -->
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content="A cozy corner where my silly thoughts live." />
     <link rel="canonical" href={canonicalURL} />
     
     <!-- Open Graph -->
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:title" content="Antareep's Blog" />
+    <meta property="og:description" content="A cozy corner where my silly thoughts live." />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:site_name" content="Antareep's Blog" />
     <meta property="og:type" content="website" />
-    {image && <meta property="og:image" content={image} />}
+    <meta property="og:image" content={finalImage} />
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    {image && <meta name="twitter:image" content={image} />}
+    <meta name="twitter:title" content="Antareep's Blog" />
+    <meta name="twitter:description" content="A cozy corner where my silly thoughts live." />
+    <meta name="twitter:image" content={finalImage} />
     
     <ClientRouter />
     

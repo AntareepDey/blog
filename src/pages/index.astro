@@ -31,20 +31,20 @@ const years = Object.keys(postsByYear).map(Number).sort((a, b) => b - a);
 <MainLayout title="Antareep's Blog">
   <div class="min-h-screen">
     <Header />
-    
-    <main class="max-w-6xl mx-auto px-6 py-12">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-1">
         <!-- Profile Section -->
-        <aside class="lg:col-span-1">
+        <!-- <aside class="lg:col-span-1">
           <ProfileSection />
-        </aside>
+        </aside> -->
         
         <!-- Blog Posts Section -->
-        <section class="lg:col-span-2">
+        <section class="mx-auto w-full">
           <div class="space-y-12">
             {years.map(year => (
               <div>
-                <h2 class="font-eb-garamond font-bold text-2xl text-light-text dark:text-dark-text mb-8 sticky top-0 bg-[#f0eee6] dark:bg-[#1f1e1d] pb-2 pt-1 z-10 " style="width: calc(100% + 3rem); margin-left: -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem;">
+                <h2 class="font-eb-garamond font-bold text-2xl text-light-text dark:text-dark-text mb-5 sticky top-0 bg-[#f0eee6] dark:bg-[#1f1e1d] pb-2 pt-1 z-10 " style="width: calc(100% + 3rem); margin-left: -1.5rem; padding-left: 1.5rem; padding-right: 1.5rem;">
                   {year}
                 </h2>
                 <div class="space-y-6">

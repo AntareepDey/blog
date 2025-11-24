@@ -1,0 +1,24 @@
+---
+title: "The Anatomy of Fall"
+date: "2025-10-05"
+category: "Life"
+excerpt: "My thumb was mid-scroll through my twitter feed, coffee cup still warm against my lower lip on a Sunday morning..."
+draft: false
+---
+My thumb was mid-scroll through my twitter feed, coffee cup still warm against my lower lip on a Sunday morning, when a message pops up from an old friend: ***"পুজোর সব ফটো গুলো পাঠা !"*** (_Send all the pictures you took during the puja!_) .  And just like that, I’m pulled from my lazy Sunday trance. As I navigate to my phone’s gallery, I find myself smiling before the first photo even loads. You see, every year I look forward to Durga Puja with an anticipation that borders on childlike excitement. But it's not just about the pandals or the elaborate rituals—it's about Ashtami. The eighth day has become something of an unspoken tradition, an annual reunion of all my school classmates. No matter where we are, no matter how scattered life has made us, everyone who can make it, does. For those few hours, it doesn't matter that we've grown up ; we're just us, exactly as we were.
+
+As I look out my window now, I can see the slight cold but comforting wind playing with the fallen leaves, creating little swirls and eddies on the pavement. There's a certain quality to autumn air that's hard to describe—neither too hot nor too cold, just the perfect temperature that makes you want to daydream about roaming around, about going somewhere, anywhere, just to feel this weather on your skin. The smell in the air changes too, you know? It's hard to articulate, but there's this particular scent that comes with the first cool mornings. I call it the "back to school smell" and though I've been out of school for four years now, autumn still tastes like impending geometry theorems, even years after I last solved one.  It's funny how certain sensory experiences can collapse time like that, making the distance between who you were and who you are feel paper-thin. It's a season of in-betweens, of neither-this-nor-thats, and there's something deeply comforting about existing in that liminal space.
+
+The monsoon this year was plentiful and now that we're slowly inching towards winter, I love this transition. This shift in the air signals the beginning of the great Indian festive season. Durga Puja decorations are barely down before the flicker of Diwali diyas begin,leading upto the wedding season, which means my calendar fills up with invitations faster than I can keep track of them. After that, Christmas lights start appearing in markets, followed by New Year's Eve countdowns, and somewhere in between are a dozen other regional festivals, family gatherings, and celebrations that I've probably forgotten to mention. It's overwhelming and wonderful in equal measur. It feels as if the entire country collectively has decided that the year's end should be dedicated to gathering,celebrating,and feeding each other ridiculous amounts of food.
+
+Food, of course, arrives as a ritual. This season brings my favourite Bengali autumnal dishes—the comforting warmth of pithe in all its forms, from steamed bhapa to sweet puli, and the way a freshly rolled narkel naru dissolves on the tongue. There's also patishapta, dudh puli and so many others that I could write an entire separate piece . Perhaps it’s this cosy, introspective mood that makes this the time of year I surprisingly hit my reading goals. This time around, though, I'm embarrassingly behind. I just finished reading Dostoevsky's "White Nights," and I have to confess—it broke my heart in the most beautiful way. The story ends with a heartbreaking question that has stayed with me: 
+
+> My God, a moment of bliss. Why, isn't that enough for a whole lifetime?. 
+
+This season that gives us these perfect, fleeting moments of beauty and then asks us to let them go, feels like that one moment of happiness.
+
+The evenings have developed a chill that wasn't there even a week ago. I've found myself reaching for a light sweater before heading out, something I didn't need just days earlier. Autumn doesn't ask for much from us. A quiet walk among fallen leaves. A book in your bag.Maybe that's why I love this season so much—it gives permission to slow down, to notice small things, to find joy in the simple rituals of daily life.As I finish this rambling reflection, my coffee has gone cold, but I don't mind. The morning has stretched into afternoon without me noticing. The photos are still unsent, but I don't think my friend will mind the delay.
+
+After all, isn't that what autumn teaches us? That some things—memories, friendships, the perfect temperature, the taste of narkol naru are worth lingering over.
+
+Even if, like the season itself, they're fleeting.

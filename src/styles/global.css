@@ -1,10 +1,7 @@
 /* Font imports */
-@import '@fontsource/eb-garamond/400.css';
 @import '@fontsource/eb-garamond/700.css';
-@import '@fontsource/eb-garamond/400-italic.css';
 @import '@fontsource/eb-garamond/700-italic.css';
 @import '@fontsource/newsreader/400.css';
-@import '@fontsource/newsreader/500.css';
 @import '@fontsource/newsreader/600.css';
 @import '@fontsource/newsreader/700.css';
 
@@ -20,6 +17,7 @@
 html {
   font-family: 'Newsreader', serif;
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -39,14 +37,18 @@ body {
 
 ::-webkit-scrollbar-track {
   @apply bg-light-bg dark:bg-dark-bg;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   @apply bg-light-text/30 dark:bg-dark-text/30 rounded-full;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-light-text/50 dark:bg-dark-text/50;
+  opacity: 1;
 }
 
 /* Text selection */
@@ -106,7 +108,15 @@ a:focus-visible {
 }
 
 .prose :not(pre) > code {
-  @apply bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-1.5 py-0.5 rounded text-sm;
+  @apply px-1.5 py-0.5 rounded text-sm;
+  /* Light mode colors */
+  background-color: rgb(224, 221, 209) !important; /* Custom light background */
+  color: #756f66 !important; /* Custom light text color */
+}
+
+.dark .prose :not(pre) > code {
+  background-color: #3b3837 !important; /* Custom dark background */
+  color: #f9fafb !important; /* Custom dark text color */
 }
 
 /* Code block styling */
@@ -173,15 +183,17 @@ a:focus-visible {
 /* Images and figures */
 .prose img {
   @apply rounded-lg shadow-sm;
-  margin: 2rem auto;
+  margin: 2rem auto 1rem auto;
+  width: 90%; 
+  height: auto; 
 }
 
 .prose figure {
-  @apply my-8;
+  @apply my-12;
 }
 
 .prose figcaption {
-  @apply text-center mt-3 text-sm text-light-text/70 dark:text-dark-text/70 font-newsreader italic;
+  @apply text-center mt-0 text-sm text-light-text/90 dark:text-dark-text/70 font-newsreader italic;
 }
 
 /* Copy button styles */
@@ -195,4 +207,32 @@ a:focus-visible {
 
 .copy-button:active {
   transform: scale(0.95);
+}
+
+.prose blockquote {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  border-left: none !important;
+  padding-left: 0 !important;
+}
+
+/* Footnotes styling */
+
+.prose .footnotes ol {
+  @apply space-y-1;
+}
+
+.prose .footnotes li {
+  @apply leading-tight;
+  line-height: 1.4 !important;
+}
+
+.prose .footnotes li p {
+  @apply m-0 leading-tight;
+  line-height: 1.4 !important;
+}
+
+.prose .footnotes a {
+  @apply break-all;
 }
