@@ -21,8 +21,8 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
     compress({
-      gzip: false,
-      brotli: true
+      Image: false,
+      brotli: true,
     }),
     mdx(),
     sitemap()
